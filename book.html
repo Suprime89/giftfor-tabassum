@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message by Summy</title>
+     <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background-image: radial-gradient(
+      circle farthest-corner at 50% 50%,
+      hsl(187 20% 88%) 30%,
+      hsl(149 20% 94%) 100%
+  );
+}
+
+.book {
+  position: relative;
+  display: flex;
+  margin: auto;
+  width: 42cqmin; /* Increased width */
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transition: translate 1s;
+  translate: calc(min(var(--c), 1) * 50%) 0%;
+  rotate: 1 0 0 30deg;
+}
+
+.page {
+  --thickness: 4;
+  flex: none;
+  display: flex;
+  width: 100%;
+  font-size: 2.2cqmin; /* Slightly increased font size */
+  pointer-events: all;
+  user-select: none;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1s,
+      rotate 1s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 50ms);
+  translate: calc(var(--i) * -100%) 0px 0px;
+  transform: translateZ(calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * 0.23cqmin)));
+  rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
+}
+
+.front,
+.back {
+  position: relative;
+  flex: none;
+  width: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background-color: #fff;
+  translate: 0px;
+}
+
+.back {
+  translate: -100% 0;
+  rotate: 0 1 0 180deg;
+}
+
+.book {
+  counter-reset: page -1;
+}
+
+.book a {
+  color: inherit;
+}
+
+.page {
+  box-shadow: 0em 0.5em 1em -0.2em #00000020;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  padding: 2em;
+  border: 1px solid #0002;
+}
+
+.front:has(img),
+.back:has(img) {
+  padding: 0;
+}
+
+.front img,
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front::after,
+.back::after {
+  position: absolute;
+  bottom: 1em;
+  counter-increment: page;
+  content: counter(page) ".";
+  font-size: 0.8em;
+}
+
+.cover::after {
+  content: "";
+}
+
+.front::after {
+  right: 1em;
+}
+
+.front {
+  background: linear-gradient(to left, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.1em 0.5em 0.5em 0.1em;
+}
+
+.back::after {
+  left: 1em;
+}
+
+.back {
+  background-image: linear-gradient(to right, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.5em 0.1em 0.1em 0.5em;
+}
+
+.cover {
+  background: radial-gradient(
+          circle farthest-corner at 80% 20%,
+          hsl(150 80% 20% / 0.3) 0%,
+          hsl(170 60% 10% / 0.1) 100%
+      ),
+      hsl(231, 32%, 29%) url("./cover.jpg") 50% / cover;
+  color: hsl(0, 100%, 30%); /* Dark red text color for cover page */
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1px;
+  color: hsl(0, 100%, 30%); /* Dark red heading color */
+}
+
+p {
+  margin-top: 1px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: hsl(0, 100%, 30%); /* Dark red text color for paragraphs */
+}
+
+.front,
+.back {
+  padding: 1.5em;
+  color: hsl(0, 100%, 30%); /* Dark red text color for front and back pages */
+}
+
+.book {
+  width: 40cqmin; /* Slightly increased width */
+}
+
+.page {
+  font-size: 2cqmin; /* Slightly increased font size */
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5em;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background: linear-gradient(to right, #ff7eb9, #ff65a3, #ff165d);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Emoji Animation */
+.emoji {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0;
+  animation: floatEmojis 6s ease-in-out infinite;
+}
+
+@keyframes floatEmojis {
+  0% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) rotate(20deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+}
+
+/* Add random timing for each emoji */
+.emoji:nth-child(1) {
+  animation-delay: 0s;
+  left: 10%;
+}
+.emoji:nth-child(2) {
+  animation-delay: 1s;
+  left: 20%;
+}
+.emoji:nth-child(3) {
+  animation-delay: 2s;
+  left: 30%;
+}
+.emoji:nth-child(4) {
+  animation-delay: 3s;
+  left: 40%;
+}
+.emoji:nth-child(5) {
+  animation-delay: 4s;
+  left: 50%;
+}
+.emoji:nth-child(6) {
+  animation-delay: 5s;
+  left: 60%;
+}
+.emoji:nth-child(7) {
+  animation-delay: 6s;
+  left: 70%;
+}
+.emoji:nth-child(8) {
+  animation-delay: 7s;
+  left: 80%;
+}
+.emoji:nth-child(9) {
+  animation-delay: 8s;
+  left: 90%;
+}
+
+
+     </style>
+  </head>
+  <body>
+    <div class="book">
+      <div class="page">
+        <div class="front cover">
+          <h1
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            A Message for You🤍
+          </h1>
+
+          <p
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            2025.<br />Summy's Special Edition
+          </p>
+        </div>
+        <div class="back">
+          <h2>When Our Fates Intertwined ❤️✨</h2>
+
+       <p>The first time I saw Tabassum, the world around me slowed down. It was the 5th of September 2022, a regular day that turned into the most significant moment of my life. Behind the library building, where the hustle of college life faded into silence, she stood there, unaware that her presence had already changed me forever.
+
+        She wasn’t just a girl; she was poetry in motion. The sunlight played in her hair as the gentle breeze moved through the strands. She had a certain grace, a quiet aura that drew me in like gravity. When she turned to look at me, our eyes met for the first time. It was brief, but in that single moment, I felt something shift inside me.
+        
+        We exchanged a few words—nothing grand, nothing extraordinary—but for me, it was the beginning of something magical. I had no idea then that this girl would become the most important part of my life. That meeting behind the library was destiny’s way of setting our story in motion. 💖</p>
+
+        </div>
+      </div>
+      <!--2nd page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Beginning of Love ❤️✨</h2>
+          <p>
+            Only three days had passed since our first encounter, but my heart had already surrendered. On the 8th of September, something beautiful happened—I realized I loved her.
+
+It wasn’t planned. Love never is. It crept up on me, softly, quietly, until I could no longer ignore its presence. Every time I saw her, my heart raced. Every conversation, every shared moment, felt too precious to be ordinary.
+
+That day, as we sat together under the same tree near the library, something felt different. She laughed at something I said, and that laugh—it was the sweetest melody I had ever heard. I wanted to be the reason for that laughter forever.
+
+That was the day we crossed the invisible line between friendship and something far deeper. That was the day I fell in love with Tabassum. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="./1.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--3rd page-->
+      <div class="page">
+        <div class="front">
+          <h2>A Love That Grew in Shadows ✨💖</h2>
+          <p>
+            College became our secret paradise. Amid lectures, assignments, and crowded hallways, we found our little moments of magic. Love doesn’t need grand gestures—it lives in the small things.
+
+The way we stole glances at each other after the class, the way my day felt incomplete if I didn’t see her, the way a simple touch of her fingers sent shivers down my spine—these moments built the foundation of our love.
+
+We had our secret places—behind the library, near the empty corridors, under the tree where we first sat together. It was in those hidden corners that our love flourished.
+
+I remember the first time she held my hand. It wasn’t planned. It was natural, as if our hands had always belonged together. That simple touch ignited something within me—an assurance that she was mine, and I was hers.
+
+Those days were the happiest of my life. And even though I didn’t realize it then, I knew deep down that I wanted this love to last forever. ✨💖
+          </p>
+        </div>
+        <div class="back">
+          <h2>Holding On to Each Other 💫✨</h2>
+          <p>
+            A year ago, life took me away from college. The moment I stepped out of those gates for the last time, I felt an ache deep in my chest. I was leaving behind not just a place but the memories, the love, the stolen moments that had become my world.💖
+
+But love isn’t bound by distance. No matter how far we were, our hearts remained connected. We met whenever we could, and every meeting felt more precious than the last. We learned to cherish even the smallest of moments—a five-minute call, a good morning text, a late-night voice note.💖
+And when we met after weeks of separation, the way she hugged me—tight, desperate, as if she never wanted to let go—was enough to remind me that no amount of distance could weaken our bond.💖
+          </p>
+        </div>
+      </div>
+      <!--4th page-->
+      <div class="page">
+        <div class="front">
+          <h2>When Hearts Speak Without Words🤞💖</h2>
+          <p>
+            Every moment with her felt like a dream. And when we weren’t together, my dreams became the place where we met.
+
+Her touch was like an ocean of love—endless, deep, and overwhelming. When she rested her head on my chest, when our fingers intertwined, when she whispered my name in the silence of the night—it was beyond words, beyond explanation.
+
+There were nights when we lay beside each other, our bodies close, our breaths mingling. In those moments, time ceased to exist. The world outside faded away, leaving only us, wrapped in the warmth of our love.
+
+Even when she wasn’t with me, I saw her in my dreams. She was always there, smiling, reaching out to me, pulling me into her embrace. And when I woke up, longing for her touch, all I needed was a single message from her—“I love you.” That was enough to keep me going. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="./2.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--5th page-->
+      <div class="page">
+        <div class="front">
+          <h1>A Love That Felt Like Home 💫💖</h1>
+          <p>
+            We are not just lovers. We are something more. In each other’s arms, we found a home.
+
+The way she cared for me, the way we spent time together—it was more than just love; it was a life we had already begun building together.
+
+There were days when we spent time together like husband and wife eating side by side, resting in each other’s arms after a long day. We didn’t need a marriage certificate to prove our bond; we had something far greater—a connection that defied every definition. ✨
+          </p>
+        </div>
+        <div class="back">
+          <h1>The Moments That Felt Like Forever 💖✨</h1>
+          <p>
+            There are moments in life that don’t just pass—they stay with you, carved into your soul. Every time I held her, time seemed to pause, as if the universe itself wanted us to exist in that moment forever.
+
+When she lay beside me, her warmth pressed against mine, I felt more than love—I felt complete. Her breath against my skin, her fingers tracing soft patterns on my chest, and the way she fit perfectly in my arms made me believe we were made for each other.
+
+I remember the way she would look into my eyes before leaning in, her lips brushing against mine so gently, yet sending waves of desire through my entire being. Every kiss felt like a silent confession, a thousand emotions poured into one touch. The way she held me, how she’d bury her face into my neck, whispering my name—it was everything I ever needed.
+          </p>
+        </div>
+      </div>
+      <!--6th page-->
+      <div class="page">
+        <div class="front">
+          <h2>When Words Hold the Heartbeat of Love ✨💖</h2>
+          <p>
+            Even when we’re apart, a simple “I love you” from her feels like a gentle kiss on my soul. Her words, her voice, her love—they are my strength.💖✨
+            Distance tested our love, but words kept us connected. Every morning, I woke up craving her messages, and when I saw Good morning, my heart melted. Even a simple lovely message carried enough warmth to make my day.
+Nights will be special. when We’d whisper on calls, creating a world where distance didn’t exist. Close your eyes and feel me there, I will say, and suddenly, She could almost feel her resting on my chest.
+Her voice notes were my comfort, her laughter my favorite melody. Even when we were apart, she was always with me.
+And when she texted "I love you", it isn’t just a phrase—it is a lifeline.
+          </p>
+        </div>
+        <div class="back">
+          <h2>A Moment That Lasts Forever ✨💖</h2>
+          <p>
+            A kiss is more than just lips meeting; it’s a silent confession of love. Our first kiss was filled with hesitation, yet when it happened, it felt like the world disappeared.
+
+From then on, every kiss had a meaning. Some were soft and tender, like a slow love song. Others were passionate, driven by the longing of our time apart. But each kiss left me breathless, reminding me she was mine.
+
+One night, as we lay close, she kissed my forehead. It was a simple yet powerful gesture—more than passion, it was love, comfort, and home.
+
+Even now, when she’s not beside me, I close my eyes and feel her lips on mine. And in that moment, distance fades, and love takes over. 💕✨
+          </p>
+        </div>
+      </div>
+      <!--7th page-->
+      <div class="page">
+        <div class="front">
+          <h2>Grateful for You🌹❤</h2>
+          <p>
+            I just wanted to take a moment to let you know how much I appreciate you. From the very start, you’ve been someone truly special—someone I admire more than words can express.
+
+            Meeting you, even for a short time, has been a gift.
+            
+            Your kindness, your presence, and the way you make every conversation feel meaningful mean more to me than you know. I’m grateful that our paths crossed, we will make our future, I’ll always be greatful for being your husband.
+            
+            Some people leave a mark on our hearts without even trying—and you are one of them. 💕
+          </p>
+        </div>
+        <div class="back">
+          <h2>A Promise Sealed Forever ❤️✨</h2>
+          <p>February 12, 2025, was the day everything changed—I placed my world on her finger. Our love had always felt eternal, but now, it had a promise attached to it.
+            I still remember the way her eyes sparkled. She smiled, a little teary, and whispered in her mind, "I’m yours, forever". It wasn’t just an regular engagement; it was a commitment, a bond unbreakable by time or distance.
+            Though I had left college a year ago, we never let anything weaken our love. We met whenever we could, cherishing every moment like it was our last. We spent time together, not as just lovers, but as soulmates who already belonged to each other.
+            Some nights, I would dream of her beside me—her touch, her warmth, her presence. And when I woke up, reality felt empty without her. All I needed was her I love you and a kiss that could erase every pain of distance.
+            Now, we are engaged. The next step is our forever, and I know one thing for sure—our love story is just beginning. 💖💕 </p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="front">
+          <img src="./4.jpg" alt="Img 1" />
+        </div>
+        <div class="back cover">
+          <h3>Cutest Queen</h3>
+          <p>
+            Content:By Suprime<br /><a
+              href=""
+              target="_blank"
+              rel="nofollow"></a>
+
+            <br />
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="emoji">❤️‍🔥</div>
+<div class="emoji">🫶🏻</div>
+<div class="emoji">❤️</div>
+<div class="emoji">😘</div>
+<div class="emoji">👨‍❤️‍💋‍👨</div>
+<div class="emoji">💓</div>
+<div class="emoji">❣️</div>
+<div class="emoji">💘</div>
+<div class="emoji">💖</div>
+<div class="emoji">💙</div>
+<div class="emoji">💚</div>
+<div class="emoji">🥰</div>
+<div class="emoji">💗</div>
+
+<script>
+  const flipBook = (elBook) => {
+    elBook.style.setProperty("--c", 0); // Set current page
+    elBook.querySelectorAll(".page").forEach((page, idx) => {
+      page.style.setProperty("--i", idx);
+      page.addEventListener("click", (evt) => {
+        if (evt.target.closest("a")) return;
+        const curr = evt.target.closest(".back") ? idx : idx + 1;
+        elBook.style.setProperty("--c", curr);
+      });
+    });
+  };
+  
+  document.querySelectorAll(".book").forEach(flipBook);
+  
+</script>
+ 
+  </body>
+</html>
+
